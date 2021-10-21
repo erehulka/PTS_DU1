@@ -9,18 +9,19 @@ class Deck:
 
   _cards: List[CardInterface]
 
-  def __init__(self) -> None:
+  def __init__(self, discardPile: DiscardPile) -> None:
     self._cards = list()
+    self._discardPile = discardPile
 
   def addCard(self, card: CardInterface) -> None:
-    self._cards.append(card)
+    self._cards.extend(card)
 
   def shuffleDeck(self) -> None:
     shuffle(self._cards)
 
   def draw(self, count: int) -> List[CardInterface]:
     if count > len(self._cards):
-      self._cards.append(self._discardPile.shuffle())
+      self._cards.extend(self._discardPile.shuffle())
     if count > len(self._cards):
       raise Exception("There are not this many cards in deck.")
 
