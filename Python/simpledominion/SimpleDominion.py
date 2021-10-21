@@ -10,6 +10,8 @@ class SimpleDominion(SimpleDominionInterface):
   def playCard(self, handIdx: int) -> Optional[GameState]:
     if self._game.playCard(handIdx):
       pass
+
+    return None
   
   def endPlayCardPhase(self) -> Optional[GameState]:
     pass

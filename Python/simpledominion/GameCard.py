@@ -1,4 +1,4 @@
-from Python.simpledominion.GameCardType import GameCardType
+from simpledominion.GameCardType import GameCardType
 from simpledominion.CardInterface import CardInterface
 from simpledominion.GameCardType import GameCardType
 from simpledominion.TurnStatus import TurnStatus
