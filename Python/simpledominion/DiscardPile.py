@@ -5,8 +5,8 @@ from random import shuffle
 class DiscardPile:
     _cards: List[CardInterface]
 
-    def __init__(self, cards: List[CardInterface]):
-        self._cards = cards
+    def __init__(self):
+        self._cards = list()
         
     def getTopCard(self) -> Optional[CardInterface]: 
         return self._cards[-1] if self._cards else None
