@@ -39,6 +39,8 @@ class Game:
       # Print error
       return False
 
+    self._turn.endTurn()
+
     self._phase = PLAY_PHASE
     self._turn.turnStatus = TurnStatus(1, 1, 0)
     # TODO Not the end of the game?
