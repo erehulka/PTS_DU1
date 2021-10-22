@@ -1,4 +1,5 @@
 from typing import List, Optional
+from simpledominion.Play import Play
 from simpledominion.CardInterface import CardInterface
 from simpledominion.Deck import Deck
 from simpledominion.Hand import Hand
@@ -11,15 +12,14 @@ class Turn:
   _discardPile: DiscardPile
   _hand: Hand
   _deck: Deck
-
-  _playCards: List[CardInterface]
+  _play: Play
 
   def __init__(self, turnStatus: TurnStatus) -> None:
     self._turnStatus = turnStatus
     self._discardPile = DiscardPile()
     self._deck = Deck(self._discardPile)
     self._hand = Hand(self._deck)
-    self._playCards = list()
+    self._play = Play(self._discardPile)
 
   def playCardFromHand(self, idx: int) -> bool:
     card: Optional[CardInterface] = self._hand.play(idx)
@@ -27,7 +27,7 @@ class Turn:
       return False
 
     card.evaluate(self._turnStatus)
-    self._playCards.extend(card)
+    self._play.putTo(card)
     return True
 
   def endTurn(self) -> bool:
@@ -37,8 +37,7 @@ class Turn:
     return result
 
   def throwPlayAndHandCardsToDiscardPile(self) -> bool:
-    self._discardPile.addCards(self._playCards)
-    self._playCards = list()
+    self._discardPile.addCards(self._play.throwAll())
     self._discardPile.addCards(self._hand.discardAllCards())
     return True
 
