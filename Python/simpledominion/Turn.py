@@ -45,10 +45,13 @@ class Turn:
     self._discardPile.addCards([card])
 
   def playCardFromHand(self, idx: int) -> bool:
+    if self._turnStatus.actions == 0:
+      return False
     card: Optional[CardInterface] = self._hand.play(idx)
     if card is None:
       return False
 
+    self._turnStatus -= 1
     card.evaluate(self._turnStatus)
     self._play.putTo(card)
     return True

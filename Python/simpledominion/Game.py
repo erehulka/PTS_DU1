@@ -19,7 +19,7 @@ class Game:
       # Print error
       return False
     
-    return True if self._turn.hand.play(handIdx) else None
+    return self._turn.hand.play(handIdx)
     
 
   def endPlayCardPhase(self) -> bool: 
