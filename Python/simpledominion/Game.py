@@ -19,9 +19,8 @@ class Game:
       # Print error
       return False
     
-    # Play card in turn
-    self._turn.hand.play(handIdx) # TODO Handling of response
-    return True
+    return True if self._turn.hand.play(handIdx) else None
+    
 
   def endPlayCardPhase(self) -> bool: 
     if self._phase != PLAY_PHASE:
@@ -31,8 +30,8 @@ class Game:
     self._phase = BUY_PHASE
     return True
 
-  def buyCard(self, buyCardIdx) -> bool:
-    pass
+  def buyCard(self, buyCardIdx: int) -> bool:
+    return self._turn.buyCard(buyCardIdx)
   
   def endTurn(self) -> bool:
     if self._phase != BUY_PHASE:
