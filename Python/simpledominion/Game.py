@@ -16,7 +16,7 @@ class Game:
   
   def playCard(self, handIdx: int) -> bool:
     if self._phase != PLAY_PHASE:
-      # Print error
+      print("WARNING! You are not in a play phase. End the turn and try again.")
       return False
     
     return self._turn.hand.play(handIdx)
@@ -24,7 +24,7 @@ class Game:
 
   def endPlayCardPhase(self) -> bool: 
     if self._phase != PLAY_PHASE:
-      # Print error
+      print("WARNING! You are not in a play phase. End the turn and try again.")
       return False
 
     self._phase = BUY_PHASE
@@ -35,7 +35,7 @@ class Game:
   
   def endTurn(self) -> bool:
     if self._phase != BUY_PHASE:
-      # Print error
+      print("WARNING! You are not in a buy phase, so you can't end the turn. End the action phase and try again.")
       return False
 
     self._turn.endTurn()
