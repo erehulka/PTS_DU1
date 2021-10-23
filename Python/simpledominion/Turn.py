@@ -75,4 +75,8 @@ class Turn:
   def hand(self) -> Hand:
     return self._hand
 
+  @property
+  def buyDecks(self) -> List[BuyDeck]:
+    return self._buyDecks
+
   

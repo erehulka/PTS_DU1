@@ -28,5 +28,8 @@ class BuyDeck:
 
     return self._cards[0]
 
+  def isEmpty(self) -> bool:
+    return self._cardCount == 0
+
   def shuffleDeck(self):
     shuffle(self._cards)
