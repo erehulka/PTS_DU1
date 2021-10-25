@@ -21,11 +21,11 @@ class Turn:
     self._discardPile = DiscardPile()
     self._deck = Deck(self._discardPile)
     self._hand = Hand(self._deck)
-    self._play = Play(self._discardPile)
+    self._play = Play()
     self._buyDecks = list()
 
   def addBuyDeck(self, buyDeck: BuyDeck) -> bool:
-    self._buyDecks.extend(buyDeck)
+    self._buyDecks.append(buyDeck)
     return True
 
   def buyCard(self, buyCardIdx: int) -> bool:
@@ -43,6 +43,7 @@ class Turn:
 
     card.evaluate(self._turnStatus)
     self._discardPile.addCards([card])
+    return True
 
   def playCardFromHand(self, idx: int) -> bool:
     if self._turnStatus.actions == 0:
@@ -51,7 +52,7 @@ class Turn:
     if card is None:
       return False
 
-    self._turnStatus -= 1
+    self._turnStatus.actions -= 1
     card.evaluate(self._turnStatus)
     self._play.putTo(card)
     return True
@@ -70,6 +71,10 @@ class Turn:
   @property
   def turnStatus(self) -> TurnStatus:
     return self._turnStatus
+
+  @turnStatus.setter
+  def turnStatus(self, status: TurnStatus):
+    self._turnStatus = status
 
   @property
   def hand(self) -> Hand:

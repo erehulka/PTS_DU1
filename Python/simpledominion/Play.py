@@ -5,12 +5,11 @@ class Play:
 
   _cards: List[CardInterface]
 
-
   def __init__(self) -> None:
     self._cards = list()
 
   def putTo(self, card: CardInterface) -> None:
-    self._cards.extend(card)
+    self._cards.append(card)
 
   def throwAll(self) -> List[CardInterface]:
     to_return: List[CardInterface] = self._cards

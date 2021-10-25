@@ -9,7 +9,7 @@ class Hand:
 
   def __init__(self, deck: Deck) -> None:
     self._cards = list()
-    self._deck = Deck()
+    self._deck = deck
 
   def isActionCard(self, idx: int) -> bool:
     if idx > len(self._cards):
@@ -21,7 +21,9 @@ class Hand:
     card: Optional[CardInterface]
     if idx < len(self._cards):
       card = self._cards[idx]
-      self._cards = self._cards[:idx].extend(self._cards[idx+1:])
+      newCards = self._cards[:idx]
+      newCards.extend(self._cards[idx+1:])
+      self._cards = newCards
     else:
       card = None
 

@@ -25,7 +25,7 @@ class Game:
       print("WARNING! You are not in a play phase. End the turn and try again.")
       return False
     
-    return self._turn.hand.play(handIdx)
+    return self._turn.playCardFromHand(handIdx)
     
 
   def endPlayCardPhase(self) -> bool: 
@@ -54,6 +54,8 @@ class Game:
     if self.isEndOfGame():
       pass
       # TODO Evaluate end of game
+    
+    return True
 
   @property
   def turn(self) -> Turn:

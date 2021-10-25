@@ -3,8 +3,8 @@ from simpledominion.Game import Game
 
 class EndGameStrategyInterface:
 
-  def isGameover(self) -> Optional[bool]:
-    pass
+  def isGameover(self) -> bool:
+    return False
 
 class AtLeastNEmptyDecks(EndGameStrategyInterface):
 

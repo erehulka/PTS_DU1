@@ -13,7 +13,7 @@ class BuyDeck:
     self._cards = list()
 
   def addCard(self, card: CardInterface):
-    self._cards.extend(card)
+    self._cards.append(card)
     self._cardCount += 1
 
   def buy(self) -> Optional[CardInterface]:

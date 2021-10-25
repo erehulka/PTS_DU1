@@ -14,7 +14,7 @@ class Deck:
     self._discardPile = discardPile
 
   def addCard(self, card: CardInterface) -> None:
-    self._cards.extend(card)
+    self._cards.append(card)
 
   def shuffleDeck(self) -> None:
     shuffle(self._cards)
