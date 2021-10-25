@@ -34,7 +34,9 @@ class TestDeck(TestCase):
     self.deck.addCard(FakeCard(GAME_CARD_TYPE_ESTATE))
     drew = self.deck.draw(4)
     self.assertEqual(len(self.deck._cards), 2)
+    top_card = self.deck._cards[0]
     self.assertEqual(len(drew), 4)
     drew = self.deck.draw(4)
+    self.assertEqual(drew[0], top_card)
     self.assertEqual(len(self.deck._cards), 1)
     self.assertEqual(len(drew), 4)
