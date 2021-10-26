@@ -52,8 +52,11 @@ class Turn:
     if card is None:
       return False
 
-    self._turnStatus.actions -= 1
+    if card.cardType.isAction:
+      self._turnStatus.actions -= 1
     card.evaluate(self._turnStatus)
+    if card.cardType.plusCards:
+      self.hand.drawFromDeck(card.cardType.plusCards)
     self._play.putTo(card)
     return True
 
