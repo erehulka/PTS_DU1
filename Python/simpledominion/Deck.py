@@ -23,7 +23,7 @@ class Deck:
     if count > len(self._cards):
       self._cards.extend(self._discardPile.shuffle())
     if count > len(self._cards):
-      raise Exception("There are not this many cards in deck.")
+      count = len(self._cards)
 
     to_return = self._cards[:count]
     self._cards = self._cards[count:]
