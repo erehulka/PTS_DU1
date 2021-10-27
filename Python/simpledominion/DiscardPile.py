@@ -1,8 +1,32 @@
 from simpledominion.CardInterface import CardInterface
-from typing import Optional, List
+from typing import Optional, List, Type
 from random import shuffle
 
-class DiscardPile:
+class DiscardPileInterface:
+
+    def getTopCard(self) -> Optional[CardInterface]:
+        pass
+
+    def addCards(self, cards: List[CardInterface]) -> None:
+        pass
+
+    def getSize(self) -> Optional[int]:
+        pass
+
+    def shuffle(self) -> List[CardInterface]:
+        pass
+
+class DiscardPileFactory:
+
+    _class: Type[DiscardPileInterface]
+
+    def __init__(self) -> None:
+        self._class = DiscardPile
+
+    def create(self) -> DiscardPileInterface:
+        return self._class()
+
+class DiscardPile(DiscardPileInterface):
     _cards: List[CardInterface]
 
     def __init__(self, cards: List[CardInterface] = list()):

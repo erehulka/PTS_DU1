@@ -1,13 +1,43 @@
-from typing import List, Optional
+from typing import List, Optional, Type
 from simpledominion.CardInterface import CardInterface
-from simpledominion.Deck import Deck
+from simpledominion.Deck import DeckInterface
 
-class Hand:
+class HandInterface:
+
+  def __init__(self, deck: DeckInterface) -> None:
+    pass
+
+  def isActionCard(self, idx: int) -> Optional[bool]:
+    pass
+
+  def play(self, idx: int) -> Optional[CardInterface]:
+    pass
+
+  def discardAllCards(self) -> List[CardInterface]:
+    pass
+
+  def drawFromDeck(self, count: int) -> bool:
+    pass
+
+class HandFactory:
+
+  _class: Type[HandInterface]
+
+  _deck: DeckInterface
+
+  def __init__(self, deck: DeckInterface) -> None:
+    self._class = Hand
+    self._deck = deck
+
+  def create(self) -> HandInterface:
+    return self._class(self._deck)
+
+class Hand(HandInterface):
 
   _cards: List[CardInterface]
-  _deck: Deck
+  _deck: DeckInterface
 
-  def __init__(self, deck: Deck) -> None:
+  def __init__(self, deck: DeckInterface) -> None:
     self._cards = list()
     self._deck = deck
 

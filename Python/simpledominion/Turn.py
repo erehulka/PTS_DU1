@@ -1,30 +1,39 @@
 from typing import List, Optional
-from simpledominion.BuyDeck import BuyDeck
-from simpledominion.Play import Play
+from simpledominion.BuyDeck import BuyDeckInterface
+from simpledominion.Play import PlayFactory, PlayInterface
 from simpledominion.CardInterface import CardInterface
-from simpledominion.Deck import Deck
-from simpledominion.Hand import Hand
+from simpledominion.Deck import DeckInterface, DeckFactory
+from simpledominion.Hand import HandFactory, HandInterface
 from simpledominion.TurnStatus import TurnStatus
-from simpledominion.DiscardPile import DiscardPile
+from simpledominion.DiscardPile import DiscardPileFactory, DiscardPileInterface
 
 class Turn:
 
   _turnStatus: TurnStatus
-  _discardPile: DiscardPile
-  _hand: Hand
-  _deck: Deck
-  _play: Play
-  _buyDecks: List[BuyDeck]
+  _discardPile: DiscardPileInterface
+  _hand: HandInterface
+  _deck: DeckInterface
+  _play: PlayInterface
+  _buyDecks: List[BuyDeckInterface]
 
   def __init__(self, turnStatus: TurnStatus) -> None:
     self._turnStatus = turnStatus
-    self._discardPile = DiscardPile()
-    self._deck = Deck(self._discardPile)
-    self._hand = Hand(self._deck)
-    self._play = Play()
+
+    dpileFactory = DiscardPileFactory()
+    self._discardPile = dpileFactory.create()
+
+    deckFactory = DeckFactory(self._discardPile)
+    self._deck = deckFactory.create()
+
+    handFactory = HandFactory(self._deck)
+    self._hand = handFactory.create()
+
+    playFactory = PlayFactory()
+    self._play = playFactory.create()
+
     self._buyDecks = list()
 
-  def addBuyDeck(self, buyDeck: BuyDeck) -> bool:
+  def addBuyDeck(self, buyDeck: BuyDeckInterface) -> bool:
     self._buyDecks.append(buyDeck)
     return True
 
@@ -80,11 +89,11 @@ class Turn:
     self._turnStatus = status
 
   @property
-  def hand(self) -> Hand:
+  def hand(self) -> HandInterface:
     return self._hand
 
   @property
-  def buyDecks(self) -> List[BuyDeck]:
+  def buyDecks(self) -> List[BuyDeckInterface]:
     return self._buyDecks
 
   
