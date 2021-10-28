@@ -55,10 +55,11 @@ class Turn:
     return True
 
   def playCardFromHand(self, idx: int) -> bool:
-    if self._turnStatus.actions == 0:
-      return False
     card: Optional[CardInterface] = self._hand.play(idx)
     if card is None:
+      return False
+
+    if card.cardType.isAction and self._turnStatus.actions == 0:
       return False
 
     if card.cardType.isAction:
