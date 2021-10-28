@@ -1,3 +1,4 @@
+from typing import Type
 from simpledominion.GameCardType import GameCardType
 from simpledominion.CardInterface import CardInterface
 from simpledominion.GameCardType import GameCardType
@@ -19,3 +20,13 @@ class GameCard(CardInterface):
   def cardType(self) -> GameCardType:
     return self._type
 
+class GameCardFactory:
+
+  _class: Type[CardInterface]
+  _type: GameCardType
+
+  def __init__(self) -> None:
+    self._class = GameCard
+
+  def create(self, type: GameCardType) -> CardInterface:
+    return self._class(type)

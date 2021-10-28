@@ -8,7 +8,32 @@ BUY_PHASE = 1
 
 DEFAULT_END_STRATEGY = AtLeastNEmptyDecks
 
-class Game:
+class GameInterface:
+
+  def playCard(self, handIdx: int) -> bool:
+    pass
+
+  def endPlayCardPhase(self) -> bool:
+    pass
+
+  def buyCard(self, buyCardIdx: int) -> bool:
+    pass
+
+  def isEndOfGame(self) -> bool:
+    pass
+
+  def endTurn(self) -> bool:
+    pass
+
+  @property
+  def turn(self) -> Optional[Turn]:
+    pass
+
+  @property
+  def endGameStrategy(self) -> Optional[EndGameStrategyInterface]:
+    pass
+
+class Game(GameInterface):
 
   _turn: Turn
   _phase: int

@@ -41,7 +41,7 @@ class Turn:
     if buyCardIdx > len(self._buyDecks) or self._turnStatus.buys == 0:
       return False
 
-    card: Optional[CardInterface] = self._buyDecks[buyCardIdx].getTopCard()
+    card: Optional[CardInterface] = self._buyDecks[buyCardIdx].getCardInfo()
     if card is not None and card.cardType.cost <= self._turnStatus.coins:
       self._turnStatus.coins -= card.cardType.cost
       self._turnStatus.buys -= 1
@@ -97,4 +97,6 @@ class Turn:
   def buyDecks(self) -> List[BuyDeckInterface]:
     return self._buyDecks
 
-  
+  @property
+  def deck(self) -> DeckInterface:
+    return self._deck
