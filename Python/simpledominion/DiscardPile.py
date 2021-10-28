@@ -26,6 +26,9 @@ class DiscardPileFactory:
     def create(self) -> DiscardPileInterface:
         return self._class()
 
+    def createNonShuffling(self) -> DiscardPileInterface:
+        return NonShufflingDiscardPile()
+
 class DiscardPile(DiscardPileInterface):
     _cards: List[CardInterface]
 
@@ -47,4 +50,23 @@ class DiscardPile(DiscardPileInterface):
         shuffle(cards)
         return cards
         
+class NonShufflingDiscardPile(DiscardPileInterface):
+    _cards: List[CardInterface]
+
+    def __init__(self, cards: List[CardInterface] = list()):
+        self._cards = cards
+
+    def getTopCard(self) -> Optional[CardInterface]:
+        return self._cards[-1] if self._cards else None
+
+    def addCards(self, cards: List[CardInterface]) -> None:
+        self._cards.extend(cards)
+
+    def getSize(self) -> int:
+        return len(self._cards)
+
+    def shuffle(self) -> List[CardInterface]:
+        cards: List[CardInterface] = self._cards
+        self._cards = []
+        return cards
         
