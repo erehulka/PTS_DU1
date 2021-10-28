@@ -76,7 +76,7 @@ class Game(GameInterface):
       print("WARNING! You are not in a buy phase, so you can't end the turn. End the action phase and try again.")
       return False
 
-    self._turn.endTurn()
+    result: bool = self._turn.endTurn()
 
     self._phase = PLAY_PHASE
     self._turn.turnStatus = TurnStatus(1, 1, 0)
@@ -84,7 +84,7 @@ class Game(GameInterface):
       pass
       # TODO Evaluate end of game
     
-    return True
+    return result
 
   @property
   def turn(self) -> TurnInterface:

@@ -10,6 +10,13 @@ from simpledominion.DiscardPile import DiscardPileFactory, DiscardPileInterface
 
 class TurnInterface:
 
+  _turnStatus: TurnStatus
+  _discardPile: DiscardPileInterface
+  _hand: HandInterface
+  _deck: DeckInterface
+  _play: PlayInterface
+  _buyDecks: List[BuyDeckInterface]
+
   def __init__(self, turnStatus: TurnStatus) -> None:
     pass
 
@@ -76,8 +83,8 @@ class Turn(TurnInterface):
     deckFactory = DeckFactory(self._discardPile)
     self._deck = deckFactory.create()
 
-    handFactory = HandFactory(self._deck)
-    self._hand = handFactory.create()
+    handFactory = HandFactory()
+    self._hand = handFactory.create(self._deck)
 
     playFactory = PlayFactory()
     self._play = playFactory.create()

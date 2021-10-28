@@ -4,6 +4,9 @@ from simpledominion.Deck import DeckInterface
 
 class HandInterface:
 
+  _cards: List[CardInterface]
+  _deck: DeckInterface
+
   def __init__(self, deck: DeckInterface) -> None:
     pass
 
@@ -23,14 +26,11 @@ class HandFactory:
 
   _class: Type[HandInterface]
 
-  _deck: DeckInterface
-
-  def __init__(self, deck: DeckInterface) -> None:
+  def __init__(self) -> None:
     self._class = Hand
-    self._deck = deck
 
-  def create(self) -> HandInterface:
-    return self._class(self._deck)
+  def create(self, deck: DeckInterface) -> HandInterface:
+    return self._class(deck)
 
 class Hand(HandInterface):
 

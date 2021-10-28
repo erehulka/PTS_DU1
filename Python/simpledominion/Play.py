@@ -3,6 +3,8 @@ from simpledominion.CardInterface import CardInterface
 
 class PlayInterface:
 
+  _cards: List[CardInterface]
+
   def __init__(self) -> None:
     pass
 

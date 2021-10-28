@@ -4,6 +4,9 @@ from random import shuffle
 
 class DiscardPileInterface:
 
+    def __init__(self, cards: List[CardInterface] = list()):
+        pass
+
     def getTopCard(self) -> Optional[CardInterface]:
         pass
 
@@ -23,11 +26,11 @@ class DiscardPileFactory:
     def __init__(self) -> None:
         self._class = DiscardPile
 
-    def create(self) -> DiscardPileInterface:
-        return self._class()
+    def create(self, cards: List[CardInterface] = list()) -> DiscardPileInterface:
+        return self._class(cards)
 
-    def createNonShuffling(self) -> DiscardPileInterface:
-        return NonShufflingDiscardPile()
+    def createNonShuffling(self, cards: List[CardInterface] = list()) -> DiscardPileInterface:
+        return NonShufflingDiscardPile(cards)
 
 class DiscardPile(DiscardPileInterface):
     _cards: List[CardInterface]

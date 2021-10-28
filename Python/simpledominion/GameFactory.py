@@ -30,5 +30,6 @@ class GameFactory:
     for i in range(7):
       game.turn.deck.addCard(cardFactory.create(GAME_CARD_TYPE_COPPER))
     game.turn.deck.shuffleDeck()
+    game.turn.hand.drawFromDeck(5)
 
     return game
