@@ -1,5 +1,5 @@
 from unittest import TestCase
-from simpledominion.DiscardPile import DiscardPile
+from simpledominion.DiscardPile import DiscardPileFactory
 from simpledominion.GameCardType import GameCardType, GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER
 from simpledominion.CardInterface import CardInterface
 
@@ -19,14 +19,15 @@ class TestDiscardPile(TestCase):
         self.assertIsNone(pile.getTopCard())
 
     def setUp(self):
-        self.pile1 = DiscardPile([FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_COPPER)])
-        self.pile2 = DiscardPile([])
+        factory = DiscardPileFactory()
+        self.pile1 = factory.create([FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_COPPER)])
+        self.pile2 = factory.create()
+        self.noShufflePile = factory.createNonShuffling([FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_COPPER)])
         
     def test_get_top_card(self):
         self.assertTopIs(self.pile1, "Copper")
-        self.assertTopIsNone(self.pile2)
         
-    def test_add_cards_and_get_size(self):
+    def test_discard_piles(self):
         self.assertEqual(self.pile2.getSize(), 0)
         self.pile2.addCards([FakeCard(GAME_CARD_TYPE_ESTATE)])
         self.assertEqual(self.pile2.getSize(), 1)
@@ -34,5 +35,11 @@ class TestDiscardPile(TestCase):
         self.pile2.addCards([FakeCard(GAME_CARD_TYPE_COPPER)])
         self.assertEqual(self.pile2.getSize(), 2)
         self.assertTopIs(self.pile2, "Copper")
+
+    def test_not_shuffling(self):
+        top_card = self.noShufflePile.getTopCard()
+        cards = self.noShufflePile.shuffle()
+        test_card = cards[-1]
+        self.assertEqual(top_card, test_card)
         
         

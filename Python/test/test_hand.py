@@ -1,6 +1,6 @@
 from typing import List
 from unittest import TestCase
-from simpledominion.Hand import Hand
+from simpledominion.Hand import HandFactory, HandInterface
 from simpledominion.GameCardType import GameCardType, GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
 from test.fake_card import FakeCard
 
@@ -29,7 +29,10 @@ class FakeDeck:
 
 class TestHand(TestCase):
 
-  def assertEmpty(self, hand: Hand):
+  hand: HandInterface
+  deck: FakeDeck
+
+  def assertEmpty(self, hand: HandInterface):
     self.assertEqual(len(hand._cards), 0)
 
   def setUp(self):
@@ -38,7 +41,26 @@ class TestHand(TestCase):
       self.deck.addCard(FakeCard(GAME_CARD_TYPE_ESTATE))
     for i in range(3):
       self.deck.addCard(FakeCard(GAME_CARD_TYPE_COPPER))
-    self.hand = Hand(self.deck)
+    handFactory = HandFactory()
+    self.hand = handFactory.create(self.deck)
 
   def test_hand(self):
-    pass
+    self.assertEmpty(self.hand)
+    self.hand.drawFromDeck(2)
+    self.assertEqual(len(self.hand._cards), 2)
+    self.assertEqual(self.hand.isActionCard(1), False)
+    self.hand.play(1)
+    self.assertEqual(len(self.hand._cards), 1)
+    self.hand.drawFromDeck(100)
+    self.assertEqual(len(self.hand._cards), 17)
+    self.hand.drawFromDeck(2)
+    self.assertEqual(len(self.hand._cards), 17)
+    self.deck.addCard(FakeCard(GAME_CARD_TYPE_COPPER))
+    self.hand.drawFromDeck(2)
+    self.assertEqual(len(self.hand._cards), 19)
+    self.deck.addCard(FakeCard(GAME_CARD_TYPE_COPPER))
+    self.hand.drawFromDeck(1)
+    self.assertEqual(len(self.hand._cards), 20)
+    played = self.hand.discardAllCards()
+    self.assertEqual(len(played), 20)
+    self.assertEmpty(self.hand)
