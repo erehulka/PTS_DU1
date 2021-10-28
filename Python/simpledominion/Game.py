@@ -1,6 +1,6 @@
 from typing import Optional
 from simpledominion.EndGameStrategy import EndGameStrategyInterface, AtLeastNEmptyDecks
-from simpledominion.Turn import Turn
+from simpledominion.Turn import TurnFactory, TurnInterface
 from simpledominion.TurnStatus import TurnStatus
 
 PLAY_PHASE = 0
@@ -9,6 +9,8 @@ BUY_PHASE = 1
 DEFAULT_END_STRATEGY = AtLeastNEmptyDecks
 
 class GameInterface:
+
+  _turn: TurnInterface
 
   def playCard(self, handIdx: int) -> bool:
     pass
@@ -26,7 +28,7 @@ class GameInterface:
     pass
 
   @property
-  def turn(self) -> Optional[Turn]:
+  def turn(self) -> TurnInterface:
     pass
 
   @property
@@ -35,13 +37,15 @@ class GameInterface:
 
 class Game(GameInterface):
 
-  _turn: Turn
+  _turn: TurnInterface
   _phase: int
 
   _endGameStrategy: EndGameStrategyInterface
   
   def __init__(self) -> None:
-    self._turn = Turn(TurnStatus(1, 1, 0))
+    turnFactory = TurnFactory()
+    self._turn = turnFactory.create(TurnStatus(1, 1, 0))
+
     self._phase = PLAY_PHASE
     self._endGameStrategy = DEFAULT_END_STRATEGY(self, 3)
   
@@ -83,7 +87,7 @@ class Game(GameInterface):
     return True
 
   @property
-  def turn(self) -> Turn:
+  def turn(self) -> TurnInterface:
     return self._turn
 
   @property

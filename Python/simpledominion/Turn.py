@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Type
 from simpledominion.GameCardType import GameCardType
 from simpledominion.BuyDeck import BuyDeckInterface
 from simpledominion.Play import PlayFactory, PlayInterface
@@ -8,7 +8,57 @@ from simpledominion.Hand import HandFactory, HandInterface
 from simpledominion.TurnStatus import TurnStatus
 from simpledominion.DiscardPile import DiscardPileFactory, DiscardPileInterface
 
-class Turn:
+class TurnInterface:
+
+  def __init__(self, turnStatus: TurnStatus) -> None:
+    pass
+
+  def addBuyDeck(self, buyDeck: BuyDeckInterface) -> bool:
+    pass
+
+  def buyCard(self, buyCardIdx: int) -> bool:
+    pass
+
+  def playCardFromHand(self, idx: int) -> bool:
+    pass
+
+  def endTurn(self) -> bool:
+    pass
+
+  def throwPlayAndHandCardsToDiscardPile(self) -> bool:
+    pass
+
+  @property
+  def turnStatus(self) -> TurnStatus:
+    pass
+
+  @turnStatus.setter
+  def turnStatus(self, status: TurnStatus):
+    pass
+
+  @property
+  def hand(self) -> HandInterface:
+    pass
+
+  @property
+  def buyDecks(self) -> List[BuyDeckInterface]:
+    pass
+
+  @property
+  def deck(self) -> DeckInterface:
+    pass
+
+class TurnFactory:
+
+  _class: Type[TurnInterface]
+
+  def __init__(self) -> None:
+    self._class = Turn
+
+  def create(self, status: TurnStatus) -> TurnInterface:
+    return self._class(status)
+
+class Turn(TurnInterface):
 
   _turnStatus: TurnStatus
   _discardPile: DiscardPileInterface

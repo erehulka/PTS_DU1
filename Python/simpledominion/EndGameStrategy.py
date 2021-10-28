@@ -1,5 +1,5 @@
 from typing import Optional
-from simpledominion.Game import Game
+from simpledominion.Game import GameInterface
 
 class EndGameStrategyInterface:
 
@@ -8,10 +8,10 @@ class EndGameStrategyInterface:
 
 class AtLeastNEmptyDecks(EndGameStrategyInterface):
 
-  _game: Game
+  _game: GameInterface
   _n: int
 
-  def __init__(self, game: Game, n: int) -> None:
+  def __init__(self, game: GameInterface, n: int) -> None:
     self._game = game
     self._n = n
     

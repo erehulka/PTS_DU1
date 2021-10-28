@@ -3,6 +3,8 @@ from typing import List, Tuple, Optional
 from simpledominion.SimpleDominionInterface import SimpleDominionInterface, GameState
 from simpledominion.Game import Game
 
+# NOT IMPLEMENTED
+
 class SimpleDominion(SimpleDominionInterface):
     
   _game: Game
