@@ -15,7 +15,7 @@ class TestBuyDeck(TestCase):
     self.assertEqual(self.buydeck.isEmpty(), False)
     self.assertEqual(self.buydeck._cardCount, 10)
     card = self.buydeck.getCardInfo()
-    self.assertEqual(card.cardType, GAME_CARD_TYPE_ESTATE)
+    self.assertEqual(card, GAME_CARD_TYPE_ESTATE)
     for i in range(10):
       bought = self.buydeck.buy()
     self.assertEqual(bought.cardType, GAME_CARD_TYPE_ESTATE)

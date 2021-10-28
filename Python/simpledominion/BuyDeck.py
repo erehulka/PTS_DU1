@@ -14,7 +14,7 @@ class BuyDeckInterface:
   def buy(self) -> Optional[CardInterface]:
     pass
 
-  def getCardInfo(self) -> Optional[CardInterface]:
+  def getCardInfo(self) -> Optional[GameCardType]:
     pass
 
   def isEmpty(self) -> Optional[bool]:
@@ -51,8 +51,8 @@ class BuyDeck(BuyDeckInterface):
     
     return self._factory.create(self._cardType)
 
-  def getCardInfo(self) -> CardInterface:
-    return self._factory.create(self._cardType)
+  def getCardInfo(self) -> GameCardType:
+    return self._cardType
 
   def isEmpty(self) -> bool:
     return self._cardCount == 0

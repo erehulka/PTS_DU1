@@ -1,4 +1,5 @@
 from typing import List, Optional
+from simpledominion.GameCardType import GameCardType
 from simpledominion.BuyDeck import BuyDeckInterface
 from simpledominion.Play import PlayFactory, PlayInterface
 from simpledominion.CardInterface import CardInterface
@@ -41,9 +42,10 @@ class Turn:
     if buyCardIdx > len(self._buyDecks) or self._turnStatus.buys == 0:
       return False
 
-    card: Optional[CardInterface] = self._buyDecks[buyCardIdx].getCardInfo()
-    if card is not None and card.cardType.cost <= self._turnStatus.coins:
-      self._turnStatus.coins -= card.cardType.cost
+    cardType: Optional[GameCardType] = self._buyDecks[buyCardIdx].getCardInfo()
+    card: Optional[CardInterface] = None
+    if cardType is not None and cardType.cost <= self._turnStatus.coins:
+      self._turnStatus.coins -= cardType.cost
       self._turnStatus.buys -= 1
       card = self._buyDecks[buyCardIdx].buy()
 
