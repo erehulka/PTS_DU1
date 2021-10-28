@@ -1,6 +1,6 @@
 from typing import List
 from unittest import TestCase
-from simpledominion.Deck import Deck
+from simpledominion.Deck import DeckFactory, DeckInterface
 from simpledominion.GameCardType import GameCardType, GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
 from simpledominion.CardInterface import CardInterface
 from test.fake_card import FakeCard
@@ -15,11 +15,12 @@ class MockDiscardPile:
 
 class TestDeck(TestCase):
 
-  def assertEmpty(self, deck: Deck):
+  def assertEmpty(self, deck: DeckInterface):
     self.assertEqual(len(deck._cards), 0)
 
   def setUp(self):
-    self.deck = Deck(MockDiscardPile())
+    deckFactory = DeckFactory(MockDiscardPile())
+    self.deck = deckFactory.create()
 
   def test_add_cards_and_get_size(self):
     self.assertEmpty(self.deck)
