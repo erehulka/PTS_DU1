@@ -14,6 +14,9 @@ class PlayInterface:
   def throwAll(self) -> List[CardInterface]:
     pass
 
+  def calculatePoints(self) -> int:
+    pass
+
 class PlayFactory:
 
   _class: Type[PlayInterface]
@@ -38,3 +41,9 @@ class Play(PlayInterface):
     to_return: List[CardInterface] = self._cards
     self._cards = list()
     return to_return
+
+  def calculatePoints(self) -> int:
+    points = 0
+    for card in self._cards:
+      points += card.cardType.points
+    return points

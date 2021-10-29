@@ -17,6 +17,9 @@ class DeckInterface:
   def draw(self, count: int) -> List[CardInterface]:
     pass
 
+  def calculatePoints(self) -> int:
+    pass
+
 class DeckFactory:
 
   _class: Type[DeckInterface]
@@ -55,3 +58,9 @@ class Deck(DeckInterface):
     to_return = self._cards[:count]
     self._cards = self._cards[count:]
     return to_return
+
+  def calculatePoints(self) -> int:
+    points = 0
+    for card in self._cards:
+      points += card.cardType.points
+    return points

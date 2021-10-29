@@ -19,6 +19,9 @@ class DiscardPileInterface:
     def shuffle(self) -> List[CardInterface]:
         pass
 
+    def calculatePoints(self) -> int:
+        pass
+
 class DiscardPileFactory:
 
     _class: Type[DiscardPileInterface]
@@ -52,6 +55,12 @@ class DiscardPile(DiscardPileInterface):
         self._cards = []
         shuffle(cards)
         return cards
+
+    def calculatePoints(self) -> int:
+        points = 0
+        for card in self._cards:
+            points += card.cardType.points
+        return points
         
 class NonShufflingDiscardPile(DiscardPileInterface):
     _cards: List[CardInterface]
@@ -72,4 +81,10 @@ class NonShufflingDiscardPile(DiscardPileInterface):
         cards: List[CardInterface] = self._cards
         self._cards = []
         return cards
+
+    def calculatePoints(self) -> int:
+        points = 0
+        for card in self._cards:
+            points += card.cardType.points
+        return points
         

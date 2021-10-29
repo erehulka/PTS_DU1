@@ -19,6 +19,9 @@ class HandInterface:
   def discardAllCards(self) -> List[CardInterface]:
     pass
 
+  def calculatePoints(self) -> int:
+    pass
+
   def drawFromDeck(self, count: int) -> bool:
     pass
 
@@ -63,6 +66,12 @@ class Hand(HandInterface):
     cards: List[CardInterface] = self._cards
     self._cards = list()
     return cards
+
+  def calculatePoints(self) -> int:
+    points = 0
+    for card in self._cards:
+      points += card.cardType.points
+    return points
 
   def drawFromDeck(self, count: int) -> bool:
     self._cards.extend(self._deck.draw(count))

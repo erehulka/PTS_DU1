@@ -26,6 +26,9 @@ class TurnInterface:
   def buyCard(self, buyCardIdx: int) -> bool:
     pass
 
+  def calculatePoints(self) -> int:
+    pass
+
   def playCardFromHand(self, idx: int) -> bool:
     pass
 
@@ -112,6 +115,9 @@ class Turn(TurnInterface):
     card.evaluate(self._turnStatus)
     self._discardPile.addCards([card])
     return True
+
+  def calculatePoints(self) -> int:
+    return self.hand.calculatePoints() + self.deck.calculatePoints() + self._discardPile.calculatePoints() + self._play.calculatePoints()
 
   def playCardFromHand(self, idx: int) -> bool:
     card: Optional[CardInterface] = self._hand.play(idx)
