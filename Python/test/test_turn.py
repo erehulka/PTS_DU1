@@ -2,8 +2,7 @@ from unittest import TestCase
 from simpledominion.TurnStatus import TurnStatus
 from simpledominion.BuyDeck import BuyDeckFactory
 from simpledominion.Turn import TurnFactory, TurnInterface
-from simpledominion.GameCardType import GameCardType, GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
-from simpledominion.CardInterface import CardInterface
+from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
 from simpledominion.GameCard import GameCardFactory
 
 

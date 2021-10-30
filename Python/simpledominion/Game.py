@@ -20,6 +20,7 @@ class GameInterface:
   _turn: TurnInterface
   _points: int
   _gameEnded: bool
+  _printWarnings: bool
 
   def playCard(self, handIdx: int) -> bool:
     pass
@@ -51,12 +52,21 @@ class GameInterface:
   def points(self) -> int:
     pass
 
+  @property
+  def printWarnings(self) -> bool:
+    pass
+
+  @printWarnings.setter
+  def printWarnings(self, printW: bool) -> None:
+    pass
+
 class Game(GameInterface):
 
   _turn: TurnInterface
   _phase: int
   _points: int
   _gameEnded: bool
+  _printWarnings: bool
 
   _endGameStrategy: EndGameStrategyInterface
   
@@ -71,11 +81,13 @@ class Game(GameInterface):
 
     self._points = 0
     self._gameEnded = False
+
+    self._printWarnings = True
   
   @whenGameRunning
   def playCard(self, handIdx: int) -> bool:
     if self._phase != PLAY_PHASE:
-      print("WARNING! You are not in a play phase. End the turn and try again.")
+      if self._printWarnings: print("WARNING! You are not in a play phase. End the turn and try again.")
       return False
     
     return self._turn.playCardFromHand(handIdx)
@@ -83,7 +95,7 @@ class Game(GameInterface):
   @whenGameRunning
   def endPlayCardPhase(self) -> bool: 
     if self._phase != PLAY_PHASE:
-      print("WARNING! You are not in a play phase. End the turn and try again.")
+      if self._printWarnings: print("WARNING! You are not in a play phase. End the turn and try again.")
       return False
 
     self._phase = BUY_PHASE
@@ -103,7 +115,7 @@ class Game(GameInterface):
   @whenGameRunning
   def endTurn(self) -> bool:
     if self._phase != BUY_PHASE:
-      print("WARNING! You are not in a buy phase, so you can't end the turn. End the action phase and try again.")
+      if self._printWarnings: print("WARNING! You are not in a buy phase, so you can't end the turn. End the action phase and try again.")
       return False
 
     result: bool = self._turn.endTurn()
@@ -127,3 +139,11 @@ class Game(GameInterface):
   @property
   def points(self) -> int:
     return self._points
+
+  @property
+  def printWarnings(self) -> bool:
+    return self._printWarnings
+
+  @printWarnings.setter
+  def printWarnings(self, printW: bool) -> None:
+    self._printWarnings = printW

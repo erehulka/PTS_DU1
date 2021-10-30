@@ -1,7 +1,7 @@
 from typing import List
 from unittest import TestCase
 from simpledominion.Deck import DeckFactory, DeckInterface
-from simpledominion.GameCardType import GameCardType, GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
 from simpledominion.CardInterface import CardInterface
 from test.fake_card import FakeCard
 
