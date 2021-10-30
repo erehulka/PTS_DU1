@@ -27,13 +27,8 @@ class HandInterface:
 
 class HandFactory:
 
-  _class: Type[HandInterface]
-
-  def __init__(self) -> None:
-    self._class = Hand
-
   def create(self, deck: DeckInterface) -> HandInterface:
-    return self._class(deck)
+    return Hand(deck)
 
 class Hand(HandInterface):
 

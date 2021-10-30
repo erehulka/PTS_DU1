@@ -60,13 +60,8 @@ class TurnInterface:
 
 class TurnFactory:
 
-  _class: Type[TurnInterface]
-
-  def __init__(self) -> None:
-    self._class = Turn
-
   def create(self, status: TurnStatus) -> TurnInterface:
-    return self._class(status)
+    return Turn(status)
 
 class Turn(TurnInterface):
 
@@ -81,10 +76,10 @@ class Turn(TurnInterface):
     self._turnStatus = turnStatus
 
     dpileFactory = DiscardPileFactory()
-    self._discardPile = dpileFactory.create()
+    self._discardPile = dpileFactory.create([])
 
-    deckFactory = DeckFactory(self._discardPile)
-    self._deck = deckFactory.create()
+    deckFactory = DeckFactory()
+    self._deck = deckFactory.create(self._discardPile)
 
     handFactory = HandFactory()
     self._hand = handFactory.create(self._deck)

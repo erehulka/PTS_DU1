@@ -21,7 +21,7 @@ class TestDiscardPile(TestCase):
     def setUp(self):
         factory = DiscardPileFactory()
         self.pile1 = factory.create([FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_COPPER)])
-        self.pile2 = factory.create()
+        self.pile2 = factory.create([])
         self.noShufflePile = factory.createNonShuffling([FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_COPPER)])
         
     def test_get_top_card(self):

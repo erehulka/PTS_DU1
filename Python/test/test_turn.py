@@ -33,6 +33,13 @@ class TestTurn(TestCase):
     self.assertEqual(self.turn.turnStatus.coins, 1)
     self.turn.endTurn()
     self.assertEqual(len(self.turn._play._cards), 0)
-    self.assertEqual(len(self.turn.hand._cards), 5)
+    self.assertEqual(len(self.turn.hand._cards), 3)
+    for i in range(3):
+      self.turn.deck.addCard(cardFactory.create(GAME_CARD_TYPE_ESTATE))
+    for i in range(7):
+      self.turn.deck.addCard(cardFactory.create(GAME_CARD_TYPE_COPPER))
     self.turn.throwPlayAndHandCardsToDiscardPile()
     self.assertEqual(len(self.turn.hand._cards), 0)
+    self.turn.endTurn()
+    self.assertEqual(len(self.turn._play._cards), 0)
+    self.assertEqual(len(self.turn.hand._cards), 5)

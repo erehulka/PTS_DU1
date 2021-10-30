@@ -5,6 +5,8 @@ from simpledominion.DiscardPile import DiscardPileInterface
 
 class DeckInterface:
 
+  _cards: List[CardInterface]
+
   def __init__(self, discardPile: DiscardPileInterface) -> None:
     pass
 
@@ -22,16 +24,11 @@ class DeckInterface:
 
 class DeckFactory:
 
-  _class: Type[DeckInterface]
+  def __init__(self) -> None:
+    pass
 
-  _discardPile: DiscardPileInterface
-
-  def __init__(self, dPile: DiscardPileInterface) -> None:
-    self._class = Deck
-    self._discardPile = dPile
-
-  def create(self) -> DeckInterface:
-    return self._class(self._discardPile)
+  def create(self, dPile: DiscardPileInterface) -> DeckInterface:
+    return Deck(dPile)
 
 class Deck(DeckInterface):
 

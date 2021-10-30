@@ -47,6 +47,10 @@ class GameInterface:
   def endGameStrategy(self) -> Optional[EndGameStrategyInterface]:
     pass
 
+  @property
+  def points(self) -> int:
+    pass
+
 class Game(GameInterface):
 
   _turn: TurnInterface

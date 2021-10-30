@@ -19,8 +19,8 @@ class TestDeck(TestCase):
     self.assertEqual(len(deck._cards), 0)
 
   def setUp(self):
-    deckFactory = DeckFactory(MockDiscardPile())
-    self.deck = deckFactory.create()
+    deckFactory = DeckFactory()
+    self.deck = deckFactory.create(MockDiscardPile())
 
   def test_add_cards_and_get_size(self):
     self.assertEmpty(self.deck)
