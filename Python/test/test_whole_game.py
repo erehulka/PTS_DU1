@@ -1,6 +1,6 @@
 from typing import Callable
 from unittest import TestCase
-from simpledominion.GameFactory import GameFactory
+from simpledominion.game.GameFactory import GameFactory
 
 class TestGame(TestCase):
 

@@ -1,8 +1,8 @@
 from typing import List, Optional, Type
 from random import shuffle
-from simpledominion.GameCardType import GameCardType
-from simpledominion.GameCard import GameCardFactory
-from simpledominion.CardInterface import CardInterface
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.card.GameCard import GameCardFactory
+from simpledominion.game.card.CardInterface import CardInterface
 
 class BuyDeckInterface:
 

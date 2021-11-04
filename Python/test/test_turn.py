@@ -1,9 +1,9 @@
 from unittest import TestCase
-from simpledominion.TurnStatus import TurnStatus
-from simpledominion.BuyDeck import BuyDeckFactory
-from simpledominion.Turn import TurnFactory, TurnInterface
-from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
-from simpledominion.GameCard import GameCardFactory
+from simpledominion.game.TurnStatus import TurnStatus
+from simpledominion.game.piles.BuyDeck import BuyDeckFactory
+from simpledominion.game.Turn import TurnFactory, TurnInterface
+from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.game.card.GameCard import GameCardFactory
 
 
 class TestTurn(TestCase):

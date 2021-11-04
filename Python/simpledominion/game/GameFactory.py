@@ -1,8 +1,8 @@
 from typing import Type
-from simpledominion.Game import GameInterface, Game
-from simpledominion.BuyDeck import BuyDeckFactory
-from simpledominion.GameCard import GameCardFactory
-from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL, GAME_CARD_TYPE_MARKET, \
+from simpledominion.game.Game import GameInterface, Game
+from simpledominion.game.piles.BuyDeck import BuyDeckFactory
+from simpledominion.game.card.GameCard import GameCardFactory
+from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL, GAME_CARD_TYPE_MARKET, \
   GAME_CARD_TYPE_LABORATORY, GAME_CARD_TYPE_SMITHY, GAME_CARD_TYPE_VILLAGE
 
 class GameFactory:

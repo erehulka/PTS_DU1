@@ -1,6 +1,6 @@
 from typing import List, Optional, Type
-from simpledominion.CardInterface import CardInterface
-from simpledominion.Deck import DeckInterface
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.piles.Deck import DeckInterface
 
 class HandInterface:
 

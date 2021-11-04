@@ -1,7 +1,7 @@
 from random import shuffle
 from typing import List, Optional, Type
-from simpledominion.CardInterface import CardInterface
-from simpledominion.DiscardPile import DiscardPileInterface
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.piles.DiscardPile import DiscardPileInterface
 
 class DeckInterface:
 

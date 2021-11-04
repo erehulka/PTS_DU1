@@ -1,5 +1,5 @@
-from simpledominion.CardInterface import CardInterface
-from simpledominion.GameCardType import GameCardType
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.card.GameCardType import GameCardType
 
 class FakeCard(CardInterface):
     def __init__(self, cardType: GameCardType):

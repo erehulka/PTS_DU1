@@ -1,12 +1,12 @@
 from typing import List, Optional, Type
-from simpledominion.GameCardType import GameCardType
-from simpledominion.BuyDeck import BuyDeckInterface
-from simpledominion.Play import PlayFactory, PlayInterface
-from simpledominion.CardInterface import CardInterface
-from simpledominion.Deck import DeckInterface, DeckFactory
-from simpledominion.Hand import HandFactory, HandInterface
-from simpledominion.TurnStatus import TurnStatus
-from simpledominion.DiscardPile import DiscardPileFactory, DiscardPileInterface
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.piles.BuyDeck import BuyDeckInterface
+from simpledominion.game.piles.Play import PlayFactory, PlayInterface
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.piles.Deck import DeckInterface, DeckFactory
+from simpledominion.game.player.Hand import HandFactory, HandInterface
+from simpledominion.game.TurnStatus import TurnStatus
+from simpledominion.game.piles.DiscardPile import DiscardPileFactory, DiscardPileInterface
 
 class TurnInterface:
 

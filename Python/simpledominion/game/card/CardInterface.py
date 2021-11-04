@@ -1,5 +1,5 @@
-from simpledominion.TurnStatus import TurnStatus
-from simpledominion.GameCardType import GameCardType
+from simpledominion.game.TurnStatus import TurnStatus
+from simpledominion.game.card.GameCardType import GameCardType
 
 class CardInterface:
 

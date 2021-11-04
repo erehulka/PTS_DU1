@@ -1,5 +1,5 @@
 from typing import List, Optional, Type
-from simpledominion.CardInterface import CardInterface
+from simpledominion.game.card.CardInterface import CardInterface
 
 class PlayInterface:
 

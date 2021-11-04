@@ -1,6 +1,6 @@
 from unittest import TestCase
-from simpledominion.Play import PlayFactory, PlayInterface
-from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.game.piles.Play import PlayFactory, PlayInterface
+from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_FESTIVAL
 from test.fake_card import FakeCard
 
 

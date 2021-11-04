@@ -1,4 +1,4 @@
-from simpledominion.CardInterface import CardInterface
+from simpledominion.game.card.CardInterface import CardInterface
 from typing import Optional, List, Type
 from random import shuffle
 

@@ -1,5 +1,5 @@
 from typing import List, Optional
-from simpledominion.BuyDeck import BuyDeckInterface
+from simpledominion.game.piles.BuyDeck import BuyDeckInterface
 
 class EndGameStrategyInterface:
 
