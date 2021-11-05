@@ -23,7 +23,6 @@ class GameCard(CardInterface):
 class GameCardFactory:
 
   _class: Type[CardInterface]
-  _type: GameCardType
 
   def __init__(self) -> None:
     self._class = GameCard
