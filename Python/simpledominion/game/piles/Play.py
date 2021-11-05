@@ -1,7 +1,8 @@
 from typing import List, Optional, Type
-from simpledominion.CardInterface import CardInterface
+from simpledominion.Pile import Pile
+from simpledominion.game.card.CardInterface import CardInterface
 
-class PlayInterface:
+class PlayInterface(Pile):
 
   _cards: List[CardInterface]
 
@@ -12,9 +13,6 @@ class PlayInterface:
     pass
 
   def throwAll(self) -> List[CardInterface]:
-    pass
-
-  def calculatePoints(self) -> int:
     pass
 
 class PlayFactory:
@@ -41,9 +39,3 @@ class Play(PlayInterface):
     to_return: List[CardInterface] = self._cards
     self._cards = list()
     return to_return
-
-  def calculatePoints(self) -> int:
-    points = 0
-    for card in self._cards:
-      points += card.cardType.points
-    return points

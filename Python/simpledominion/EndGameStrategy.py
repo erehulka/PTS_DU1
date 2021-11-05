@@ -1,5 +1,6 @@
 from typing import List, Optional
-from simpledominion.BuyDeck import BuyDeckInterface
+from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_PROVINCE
+from simpledominion.game.piles.BuyDeck import BuyDeckInterface
 
 class EndGameStrategyInterface:
 
@@ -30,3 +31,16 @@ class AtLeastNEmptyDecks(EndGameStrategyInterface):
         emptyDecks += 1
 
     return emptyDecks >= self._n
+
+class ProvinceDeckEmpty(EndGameStrategyInterface):
+
+  _buyDecks: List[BuyDeckInterface]
+
+  def __init__(self, buyDecks: List[BuyDeckInterface]) -> None:
+    self._buyDecks = buyDecks
+
+  def isGameover(self) -> bool:
+    for deck in self._buyDecks:
+      if deck.getCardInfo() == GAME_CARD_TYPE_PROVINCE and deck.isEmpty(): return True
+
+    return False

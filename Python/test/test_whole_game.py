@@ -1,6 +1,6 @@
 from typing import Callable
 from unittest import TestCase
-from simpledominion.GameFactory import GameFactory
+from simpledominion.game.GameFactory import GameFactory
 
 class TestGame(TestCase):
 
@@ -15,6 +15,11 @@ class TestGame(TestCase):
       self.assertEqual(True, False)
     except:
       pass
+
+  """ 
+  Only way to test Game with deterministic tests - test end of turn, end of game and points.
+  All parts of Game are tested in other tests.
+  """
 
   def test_whole_game(self):
     self.game.calculatePoints()

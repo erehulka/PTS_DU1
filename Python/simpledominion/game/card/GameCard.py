@@ -1,8 +1,8 @@
 from typing import Type
-from simpledominion.GameCardType import GameCardType
-from simpledominion.CardInterface import CardInterface
-from simpledominion.GameCardType import GameCardType
-from simpledominion.TurnStatus import TurnStatus
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.TurnStatus import TurnStatus
 
 class GameCard(CardInterface):
 
@@ -23,7 +23,6 @@ class GameCard(CardInterface):
 class GameCardFactory:
 
   _class: Type[CardInterface]
-  _type: GameCardType
 
   def __init__(self) -> None:
     self._class = GameCard

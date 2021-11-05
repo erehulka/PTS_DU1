@@ -1,8 +1,7 @@
 from typing import List, Optional, Type
-from random import shuffle
-from simpledominion.GameCardType import GameCardType
-from simpledominion.GameCard import GameCardFactory
-from simpledominion.CardInterface import CardInterface
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.card.GameCard import GameCardFactory
+from simpledominion.game.card.CardInterface import CardInterface
 
 class BuyDeckInterface:
 
@@ -17,7 +16,7 @@ class BuyDeckInterface:
   def getCardInfo(self) -> Optional[GameCardType]:
     pass
 
-  def isEmpty(self) -> Optional[bool]:
+  def isEmpty(self) -> bool:
     pass
 
 class BuyDeckFactory:
@@ -51,7 +50,8 @@ class BuyDeck(BuyDeckInterface):
     
     return self._factory.create(self._cardType)
 
-  def getCardInfo(self) -> GameCardType:
+  def getCardInfo(self) -> Optional[GameCardType]:
+    if self._cardCount <= 0: return None
     return self._cardType
 
   def isEmpty(self) -> bool:

@@ -1,7 +1,7 @@
 from typing import Callable, Optional
 from simpledominion.EndGameStrategy import EndGameStrategyInterface, EndGameStrategyFactory
-from simpledominion.Turn import TurnFactory, TurnInterface
-from simpledominion.TurnStatus import TurnStatus
+from simpledominion.game.Turn import TurnFactory, TurnInterface
+from simpledominion.game.TurnStatus import TurnStatus
 
 PLAY_PHASE = 0
 BUY_PHASE = 1

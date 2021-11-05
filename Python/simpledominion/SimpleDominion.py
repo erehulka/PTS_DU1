@@ -1,7 +1,7 @@
 
 from typing import List, Tuple, Optional
 from simpledominion.SimpleDominionInterface import SimpleDominionInterface, GameState
-from simpledominion.Game import Game
+from simpledominion.game.Game import Game
 
 # NOT IMPLEMENTED
 

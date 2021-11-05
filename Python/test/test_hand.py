@@ -1,7 +1,7 @@
 from typing import List
 from unittest import TestCase
-from simpledominion.Hand import HandFactory, HandInterface
-from simpledominion.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.game.player.Hand import HandFactory, HandInterface
+from simpledominion.game.card.GameCardType import *
 from test.fake_card import FakeCard
 
 class FakeDeck:
@@ -45,6 +45,7 @@ class TestHand(TestCase):
     self.hand = handFactory.create(self.deck)
 
   def test_hand(self):
+    # Test that Hand is working correctly, can draw from deck and can play cards
     self.assertEmpty(self.hand)
     self.hand.drawFromDeck(2)
     self.assertEqual(len(self.hand._cards), 2)

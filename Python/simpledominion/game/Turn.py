@@ -1,12 +1,12 @@
 from typing import List, Optional, Type
-from simpledominion.GameCardType import GameCardType
-from simpledominion.BuyDeck import BuyDeckInterface
-from simpledominion.Play import PlayFactory, PlayInterface
-from simpledominion.CardInterface import CardInterface
-from simpledominion.Deck import DeckInterface, DeckFactory
-from simpledominion.Hand import HandFactory, HandInterface
-from simpledominion.TurnStatus import TurnStatus
-from simpledominion.DiscardPile import DiscardPileFactory, DiscardPileInterface
+from simpledominion.game.card.GameCardType import GameCardType
+from simpledominion.game.piles.BuyDeck import BuyDeckInterface
+from simpledominion.game.piles.Play import PlayFactory, PlayInterface
+from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.game.piles.Deck import DeckInterface, DeckFactory
+from simpledominion.game.player.Hand import HandFactory, HandInterface
+from simpledominion.game.TurnStatus import TurnStatus
+from simpledominion.game.piles.DiscardPile import DiscardPileFactory, DiscardPileInterface
 
 class TurnInterface:
 
@@ -107,7 +107,6 @@ class Turn(TurnInterface):
     if card is None:
       return False
 
-    card.evaluate(self._turnStatus)
     self._discardPile.addCards([card])
     return True
 
@@ -115,7 +114,7 @@ class Turn(TurnInterface):
     return self.hand.calculatePoints() + self.deck.calculatePoints() + self._discardPile.calculatePoints() + self._play.calculatePoints()
 
   def playCardFromHand(self, idx: int) -> bool:
-    card: Optional[CardInterface] = self._hand.play(idx)
+    card: Optional[CardInterface] = self._hand.peek(idx)
     if card is None:
       return False
 
@@ -124,10 +123,15 @@ class Turn(TurnInterface):
 
     if card.cardType.isAction:
       self._turnStatus.actions -= 1
-    card.evaluate(self._turnStatus)
+
+    card = self._hand.play(idx)
+    if card is None:
+      return False
+      
     if card.cardType.plusCards:
       self.hand.drawFromDeck(card.cardType.plusCards)
     self._play.putTo(card)
+    card.evaluate(self._turnStatus)
     return True
 
   def endTurn(self) -> bool:
