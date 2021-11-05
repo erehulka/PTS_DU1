@@ -1,8 +1,9 @@
 from typing import List, Optional, Type
+from simpledominion.Pile import Pile
 from simpledominion.game.card.CardInterface import CardInterface
 from simpledominion.game.piles.Deck import DeckInterface
 
-class HandInterface:
+class HandInterface(Pile):
 
   _cards: List[CardInterface]
   _deck: DeckInterface
@@ -16,10 +17,10 @@ class HandInterface:
   def play(self, idx: int) -> Optional[CardInterface]:
     pass
 
-  def discardAllCards(self) -> List[CardInterface]:
+  def peek(self, idx: int) -> Optional[CardInterface]:
     pass
 
-  def calculatePoints(self) -> int:
+  def discardAllCards(self) -> List[CardInterface]:
     pass
 
   def drawFromDeck(self, count: int) -> bool:
@@ -48,10 +49,16 @@ class Hand(HandInterface):
   def play(self, idx: int) -> Optional[CardInterface]:
     card: Optional[CardInterface]
     if idx < len(self._cards):
+      card = self._cards.pop(idx)
+    else:
+      card = None
+
+    return card
+
+  def peek(self, idx: int) -> Optional[CardInterface]:
+    card: Optional[CardInterface]
+    if idx < len(self._cards):
       card = self._cards[idx]
-      newCards = self._cards[:idx]
-      newCards.extend(self._cards[idx+1:])
-      self._cards = newCards
     else:
       card = None
 
@@ -61,12 +68,6 @@ class Hand(HandInterface):
     cards: List[CardInterface] = self._cards
     self._cards = list()
     return cards
-
-  def calculatePoints(self) -> int:
-    points = 0
-    for card in self._cards:
-      points += card.cardType.points
-    return points
 
   def drawFromDeck(self, count: int) -> bool:
     self._cards.extend(self._deck.draw(count))

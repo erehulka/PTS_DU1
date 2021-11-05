@@ -1,8 +1,9 @@
 from simpledominion.game.card.CardInterface import CardInterface
+from simpledominion.Pile import Pile
 from typing import Optional, List, Type
 from random import shuffle
 
-class DiscardPileInterface:
+class DiscardPileInterface(Pile):
 
     def __init__(self, cards: List[CardInterface] = list()):
         pass
@@ -16,10 +17,7 @@ class DiscardPileInterface:
     def getSize(self) -> Optional[int]:
         pass
 
-    def shuffle(self) -> List[CardInterface]:
-        pass
-
-    def calculatePoints(self) -> int:
+    def getCards(self) -> List[CardInterface]:
         pass
 
 class DiscardPileFactory:
@@ -45,17 +43,11 @@ class DiscardPile(DiscardPileInterface):
     def getSize(self) -> int:
         return len(self._cards)
         
-    def shuffle(self) -> List[CardInterface]:
+    def getCards(self) -> List[CardInterface]:
         cards: List[CardInterface] = self._cards
         self._cards = []
         shuffle(cards)
         return cards
-
-    def calculatePoints(self) -> int:
-        points = 0
-        for card in self._cards:
-            points += card.cardType.points
-        return points
         
 class NonShufflingDiscardPile(DiscardPileInterface):
     _cards: List[CardInterface]
@@ -72,14 +64,7 @@ class NonShufflingDiscardPile(DiscardPileInterface):
     def getSize(self) -> int:
         return len(self._cards)
 
-    def shuffle(self) -> List[CardInterface]:
+    def getCards(self) -> List[CardInterface]:
         cards: List[CardInterface] = self._cards
         self._cards = []
         return cards
-
-    def calculatePoints(self) -> int:
-        points = 0
-        for card in self._cards:
-            points += card.cardType.points
-        return points
-        
