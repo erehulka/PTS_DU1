@@ -16,6 +16,11 @@ class TestGame(TestCase):
     except:
       pass
 
+  """ 
+  Only way to test Game with deterministic tests - test end of turn, end of game and points.
+  All parts of Game are tested in other tests.
+  """
+
   def test_whole_game(self):
     self.game.calculatePoints()
     self.assertEqual(self.game.points, 3)

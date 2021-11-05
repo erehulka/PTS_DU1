@@ -15,6 +15,8 @@ class TestTurn(TestCase):
     self.turn = turnFactory.create(TurnStatus(1, 0, 0))
 
   def test_play_turn(self):
+    # Test all parts of Turn (Play, Hand etc.)
+    # Also test TurnStatus and Card evaluation
     buyDeckFactory = BuyDeckFactory()
     self.turn.addBuyDeck(buyDeckFactory.create(GAME_CARD_TYPE_ESTATE, 10))
     self.assertEqual(len(self.turn.buyDecks), 1)
@@ -31,6 +33,7 @@ class TestTurn(TestCase):
     self.assertEqual(len(self.turn._play._cards), 1)
     self.assertEqual(self.turn.turnStatus.coins, 1)
     self.turn.endTurn()
+    # Test that after end of turn, the turnStatus will reset
     self.assertEqual(len(self.turn._play._cards), 0)
     self.assertEqual(len(self.turn.hand._cards), 3)
     for i in range(3):

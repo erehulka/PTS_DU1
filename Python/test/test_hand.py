@@ -45,6 +45,7 @@ class TestHand(TestCase):
     self.hand = handFactory.create(self.deck)
 
   def test_hand(self):
+    # Test that Hand is working correctly, can draw from deck and can play cards
     self.assertEmpty(self.hand)
     self.hand.drawFromDeck(2)
     self.assertEqual(len(self.hand._cards), 2)

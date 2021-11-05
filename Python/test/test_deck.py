@@ -23,6 +23,7 @@ class TestDeck(TestCase):
     self.deck = deckFactory.create(MockDiscardPile())
 
   def test_add_cards_and_get_size(self):
+    # Test that deck is returning cards correctly and is working correctly with discard pile
     self.assertEmpty(self.deck)
     self.deck.addCard(FakeCard(GAME_CARD_TYPE_COPPER))
     self.deck.addCard(FakeCard(GAME_CARD_TYPE_ESTATE))
