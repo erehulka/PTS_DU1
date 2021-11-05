@@ -107,7 +107,6 @@ class Turn(TurnInterface):
     if card is None:
       return False
 
-    card.evaluate(self._turnStatus)
     self._discardPile.addCards([card])
     return True
 
@@ -115,7 +114,7 @@ class Turn(TurnInterface):
     return self.hand.calculatePoints() + self.deck.calculatePoints() + self._discardPile.calculatePoints() + self._play.calculatePoints()
 
   def playCardFromHand(self, idx: int) -> bool:
-    card: Optional[CardInterface] = self._hand.play(idx)
+    card: Optional[CardInterface] = self._hand.peek(idx)
     if card is None:
       return False
 
@@ -124,10 +123,15 @@ class Turn(TurnInterface):
 
     if card.cardType.isAction:
       self._turnStatus.actions -= 1
-    card.evaluate(self._turnStatus)
+
+    card = self._hand.play(idx)
+    if card is None:
+      return False
+      
     if card.cardType.plusCards:
       self.hand.drawFromDeck(card.cardType.plusCards)
     self._play.putTo(card)
+    card.evaluate(self._turnStatus)
     return True
 
   def endTurn(self) -> bool:
