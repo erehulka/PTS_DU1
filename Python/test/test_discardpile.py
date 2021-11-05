@@ -38,7 +38,7 @@ class TestDiscardPile(TestCase):
 
     def test_not_shuffling(self):
         top_card = self.noShufflePile.getTopCard()
-        cards = self.noShufflePile.shuffle()
+        cards = self.noShufflePile.getCards()
         test_card = cards[-1]
         self.assertEqual(top_card, test_card)
         

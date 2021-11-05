@@ -1,7 +1,7 @@
 from typing import List
 from unittest import TestCase
 from simpledominion.game.piles.Deck import DeckFactory, DeckInterface
-from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.game.card.GameCardType import *
 from simpledominion.game.card.CardInterface import CardInterface
 from test.fake_card import FakeCard
 
@@ -10,7 +10,7 @@ class MockDiscardPile:
   def __init__(self) -> None:
     pass
 
-  def shuffle(self) -> List[CardInterface]:
+  def getCards(self) -> List[CardInterface]:
     return [FakeCard(GAME_CARD_TYPE_ESTATE), FakeCard(GAME_CARD_TYPE_FESTIVAL), FakeCard(GAME_CARD_TYPE_COPPER)]
 
 class TestDeck(TestCase):

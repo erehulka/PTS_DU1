@@ -1,7 +1,7 @@
 from typing import List
 from unittest import TestCase
 from simpledominion.game.card.GameCard import GameCard
-from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL
+from simpledominion.game.card.GameCardType import *
 
 class MockTurnStatus:
 
