@@ -2,8 +2,7 @@ from typing import Type
 from simpledominion.game.Game import GameInterface, Game
 from simpledominion.game.piles.BuyDeck import BuyDeckFactory
 from simpledominion.game.card.GameCard import GameCardFactory
-from simpledominion.game.card.GameCardType import GAME_CARD_TYPE_ESTATE, GAME_CARD_TYPE_COPPER, GAME_CARD_TYPE_FESTIVAL, GAME_CARD_TYPE_MARKET, \
-  GAME_CARD_TYPE_LABORATORY, GAME_CARD_TYPE_SMITHY, GAME_CARD_TYPE_VILLAGE
+from simpledominion.game.card.GameCardType import *
 
 class GameFactory:
 
@@ -23,6 +22,7 @@ class GameFactory:
     game.turn.addBuyDeck(buyDeckFactory.create(GAME_CARD_TYPE_LABORATORY, 10))
     game.turn.addBuyDeck(buyDeckFactory.create(GAME_CARD_TYPE_SMITHY, 10))
     game.turn.addBuyDeck(buyDeckFactory.create(GAME_CARD_TYPE_VILLAGE, 10))
+    game.turn.addBuyDeck(buyDeckFactory.create(GAME_CARD_TYPE_PROVINCE, 10))
 
     cardFactory = GameCardFactory()
     for i in range(3):
